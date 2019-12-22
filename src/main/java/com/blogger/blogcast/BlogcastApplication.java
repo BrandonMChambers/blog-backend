@@ -2,21 +2,20 @@ package com.blogger.blogcast;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-public class BlogcastApplication {
+public class BlogcastApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure (SpringApplicationBuilder builder) {
+		return builder.sources(BlogcastApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BlogcastApplication.class, args);
 	}
-/*
-	@Bean
-	ApplicationRunner applicationRunner(UserRepository userRepository){
-		return args -> {
-			userRepository.save(new User("Brandon"));
-		};
-	}
-
- */
 
 }
