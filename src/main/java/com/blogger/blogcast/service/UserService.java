@@ -1,11 +1,9 @@
 package com.blogger.blogcast.service;
 
-import com.blogger.blogcast.model.User;
+import com.blogger.blogcast.model.BlogUser;
 import com.blogger.blogcast.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService {
@@ -17,22 +15,22 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Iterable<User> findAllUsers(){
+    public Iterable<BlogUser> findAllUsers(){
         return userRepository.findAll();
     }
 
-    public User createUser(User user){
-        return userRepository.save(user);
+    public BlogUser createUser(BlogUser blogUser){
+        return userRepository.save(blogUser);
     }
 
-    public User showUser(Long id){
+    public BlogUser showUser(Long id){
         return userRepository.findById(id).get();
     }
 
-    public User updateUser(Long id, User updateUser) {
-        User originalUser = userRepository.findById(id).get();
-        originalUser.setName(updateUser.getName());
-        return userRepository.save(originalUser);
+    public BlogUser updateUser(Long id, BlogUser updateBlogUser) {
+        BlogUser originalBlogUser = userRepository.findById(id).get();
+        originalBlogUser.setName(updateBlogUser.getName());
+        return userRepository.save(originalBlogUser);
     }
 
     public Boolean deleteUser(Long id){

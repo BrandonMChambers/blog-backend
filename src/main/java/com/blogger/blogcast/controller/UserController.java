@@ -1,14 +1,11 @@
 package com.blogger.blogcast.controller;
 
-import com.blogger.blogcast.model.User;
+import com.blogger.blogcast.model.BlogUser;
 import com.blogger.blogcast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class UserController {
@@ -21,23 +18,23 @@ public class UserController {
     }
     //works
     @GetMapping("/all")
-    public ResponseEntity<Iterable<User>> findAll() {
+    public ResponseEntity<Iterable<BlogUser>> findAll() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
     //works
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
+    public ResponseEntity<BlogUser> findById(@PathVariable Long id) {
         return new ResponseEntity<>(userService.showUser(id), HttpStatus.OK);
     }
     //works
     @PostMapping("/addUser")
-    public ResponseEntity<User> addNewUser(@RequestBody User user) {
-        return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
+    public ResponseEntity<BlogUser> addNewUser(@RequestBody BlogUser blogUser) {
+        return new ResponseEntity<>(userService.createUser(blogUser), HttpStatus.CREATED);
     }
     //works
     @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.OK);
+    public ResponseEntity<BlogUser> updateUser(@PathVariable Long id, @RequestBody BlogUser blogUser) {
+        return new ResponseEntity<>(userService.updateUser(id, blogUser), HttpStatus.OK);
     }
     //works
     @DeleteMapping("/deleteUser/{id}")
