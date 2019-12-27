@@ -1,6 +1,7 @@
 package com.blogger.blogcast.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -12,6 +13,7 @@ public class User {
     private Long id;
 
     @Column
+    @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
     private String username;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -61,4 +63,16 @@ public class User {
     public void setFollowing(List<Blog> following) {
         this.following = following;
     }
+/*
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", username='" + username + ‘\’‘ +
+            ", running='" + running + ‘\’‘ + ", " +
+            "following='" + following + ‘\’‘ +
+                '}';
+    }
+
+ */
 }

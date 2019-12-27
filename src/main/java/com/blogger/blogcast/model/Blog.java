@@ -2,6 +2,8 @@ package com.blogger.blogcast.model;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -16,6 +18,9 @@ public class Blog {
 
     @Column
     private Instant createdOn;
+
+    @OneToMany(/*mappedBy = "USER_ID"*/)
+    private Set<BlogEntry> blogEntries = new HashSet<BlogEntry>();
 
     public Blog() {}
     public Blog(String blogTitle, Instant createdOn){
