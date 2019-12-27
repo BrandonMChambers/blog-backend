@@ -3,7 +3,9 @@ package com.blogger.blogcast.service;
 import com.blogger.blogcast.model.Blog;
 import com.blogger.blogcast.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BlogService {
     BlogRepository blogRepository;
 
