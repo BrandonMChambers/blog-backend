@@ -1,25 +1,35 @@
 package com.blogger.blogcast.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
+@Table
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column
+    @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
+    private String username;
 
-    public User(){
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Blog> running;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Blog> following;
+
+
+    public User() {
     }
 
-    public User(String name){
-        this.name = name;
+    public User(String username) {
+        this.username = username;
     }
 
     public Long getId() {
@@ -30,17 +40,39 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
+    public List<Blog> getRunning() {
+        return running;
+    }
+
+    public void setRunning(List<Blog> running) {
+        this.running = running;
+    }
+
+    public List<Blog> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<Blog> following) {
+        this.following = following;
+    }
+/*
     @Override
-    public String toString(){
+    public String toString() {
         return "User{" +
-                "name='" + name + '}';
+            "id=" + id +
+            ", username='" + username + ‘\’‘ +
+            ", running='" + running + ‘\’‘ + ", " +
+            "following='" + following + ‘\’‘ +
+                '}';
     }
+
+ */
 }
