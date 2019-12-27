@@ -63,16 +63,12 @@ public class User {
     public void setFollowing(List<Blog> following) {
         this.following = following;
     }
-/*
+
     @Override
     public String toString() {
-        return "User{" +
-            "id=" + id +
-            ", username='" + username + ‘\’‘ +
-            ", running='" + running + ‘\’‘ + ", " +
-            "following='" + following + ‘\’‘ +
+        return "User{" + "id=" + id + ", username='" + username + ", running='" + running + ", following='" + following +
                 '}';
     }
 
- */
+
 }

@@ -62,4 +62,11 @@ public class Timeline {
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
+
+    @Override
+    public String toString(){
+
+        return "Timeline{" + "id=" + id + ", title=" + title +
+                ", timestamp=" + timeStamp + ", allBlogEntries=" + allBlogEntries + "}";
+    }
 }
