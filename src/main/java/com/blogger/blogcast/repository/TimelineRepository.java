@@ -1,4 +1,7 @@
 package com.blogger.blogcast.repository;
 
-public interface TimelineRepository {
+import com.blogger.blogcast.model.Timeline;
+import org.springframework.data.repository.CrudRepository;
+
+public interface TimelineRepository extends CrudRepository<Timeline, Long> {
 }
