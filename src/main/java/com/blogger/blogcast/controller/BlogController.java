@@ -29,7 +29,7 @@ public class BlogController {
         return new ResponseEntity<>(newHeader, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/blog")
+    @GetMapping(value = "/all-blogs")
     public ResponseEntity<Iterable<Blog>> getAllBlogs() {
         Iterable<Blog> allBlogs = blogService.findAll();
         return new ResponseEntity<>(allBlogs, HttpStatus.OK);
