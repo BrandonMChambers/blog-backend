@@ -1,4 +1,4 @@
-package com.blogger.blogcast.datasource;
+package com.blogger.blogcast.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
