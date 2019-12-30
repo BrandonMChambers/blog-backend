@@ -19,7 +19,7 @@ public class Blog {
     @Column
     private Instant createdOn;
 
-    @OneToMany(/*mappedBy = "USER_ID"*/)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<BlogEntry> blogEntries = new HashSet<BlogEntry>();
 
     public Blog() {}
@@ -39,4 +39,17 @@ public class Blog {
     public Instant getCreatedOn() { return createdOn; }
 
     public void setCreatedOn(Instant createdOn) { this.createdOn = createdOn; }
+
+    public Set<BlogEntry> getBlogEntries() {
+        return blogEntries;
+    }
+
+    public void setBlogEntries(Set<BlogEntry> blogEntries) {
+        this.blogEntries = blogEntries;
+    }
+
+    @Override
+    public String toString(){
+        return "Blog{" + "id=" + id + ", blogTitle=" + blogTitle + ", createdOn=" + createdOn + ", blogEntries=" + blogEntries + "}";
+    }
 }

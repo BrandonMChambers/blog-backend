@@ -37,6 +37,7 @@ public class BlogEntry {
         this.blog_Id = blogId;
         this.title = title;
         this.body = body;
+        this.createdOn = createdOn;
     }
 
     public BlogEntry(String title, String body, Instant createdOn){
@@ -89,6 +90,11 @@ public class BlogEntry {
 
     public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
+    }
+
+    @Override
+    public String toString(){
+        return "BlogEntry{" + "id=" + id + ", user_id=" + user_Id + ", blog_id=" + blog_Id + ", title=" + title + ", body=" + body + ", createdOn" + createdOn + "}";
     }
 
 }

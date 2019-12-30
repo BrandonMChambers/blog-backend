@@ -83,4 +83,10 @@ public class Comment {
     public void setBlog_entry_id(Long blog_entry_id) {
         this.blog_entry_id = blog_entry_id;
     }
+
+    @Override
+    public String toString(){
+
+        return "Comment{" + "id=" + id + ", body=" + body + ", authorId=" + authorId + ", blog_entry_id=" + blog_entry_id + "}";
+    }
 }
