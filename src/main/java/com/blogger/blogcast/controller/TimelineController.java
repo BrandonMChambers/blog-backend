@@ -19,28 +19,28 @@ public class TimelineController {
 
         @GetMapping(value ="/timeline")
         public ResponseEntity<Iterable<Timeline>> index() {
-            return new ResponseEntity<>(timelineService.index(), HttpStatus.OK);
+            return timelineService.index();
         }
 
         @GetMapping(value ="/timeline/{id}")
         public ResponseEntity<Timeline> show(@PathVariable Long id) {
-            return new ResponseEntity<>(timelineService.show(id), HttpStatus.OK);
+            return timelineService.show(id);
         }
 
         @PostMapping(value ="/timeline")
         public ResponseEntity<Timeline> create(@RequestBody Timeline timeline) {
-            return new ResponseEntity<>(timelineService.create(timeline), HttpStatus.CREATED);
+            return timelineService.create(timeline);
         }
 
         @PutMapping(value ="/timeline/{id}")
         public ResponseEntity<Timeline> update(@PathVariable Long id,@RequestBody Timeline timeline) {
-            return new ResponseEntity<>(timelineService.update(id, timeline), HttpStatus.OK);
+            return timelineService.update(id, timeline);
         }
 
 
         @DeleteMapping(value ="/timeline/{id}")
-        public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
-            return new ResponseEntity<>(timelineService.delete(id), HttpStatus.OK);
+        public ResponseEntity<?> destroy(@PathVariable Long id) {
+            return timelineService.destroy(id);
         }
     }
 

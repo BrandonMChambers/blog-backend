@@ -4,7 +4,10 @@ import com.blogger.blogcast.model.Timeline;
 import com.blogger.blogcast.repository.TimelineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 @Service
 public class TimelineService {
@@ -17,37 +20,27 @@ public class TimelineService {
 
     }
 
-    public Iterable<Timeline> index(){
-        return timelineRepository.findAll();
+    public ResponseEntity<Iterable<Timeline>> index() {
+        return new ResponseEntity<>(timelineRepository.findAll(), HttpStatus.OK);
     }
 
-    public Timeline create(Timeline timeline){
-        return timelineRepository.save(timeline);
+    public ResponseEntity<Timeline> show(Long id) {
+        return new ResponseEntity<>(timelineRepository.findById(id).get(), HttpStatus.OK);
     }
 
-    public Timeline show(Long id){
-        return timelineRepository.findById(id).get();
-    }
-/*
-    public Timeline show(String username) {
-        return timelineRepository.findByBlogEntry(timeline).get();
+    public ResponseEntity<Timeline> create(Timeline timeline) {
+        return new ResponseEntity<>(timelineRepository.save(timeline), HttpStatus.CREATED);
     }
 
- */
-
-    public Timeline show(Timeline timeline){
-        return timelineRepository.save(timeline);
-    }
-
-    public Timeline update(Long id, Timeline timeline) {
+    public ResponseEntity<Timeline> update(Long id, Timeline timeline) {
         Timeline originalTimeline = timelineRepository.findById(id).get();
         timeline.setTitle(timeline.getTitle());
-        return timelineRepository.save(timeline);
+        timelineRepository.save(timeline);
+        return new ResponseEntity<>(originalTimeline, HttpStatus.OK);
     }
 
-    public Boolean delete(Long id){
+    public ResponseEntity<?> destroy(Long id) {
         timelineRepository.deleteById(id);
-        return true;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }
