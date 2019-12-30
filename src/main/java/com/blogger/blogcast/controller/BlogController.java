@@ -25,7 +25,7 @@ public class BlogController {
         return blogService.createBlog(blog);
     }
 
-    @GetMapping(value = "/all-blogs")
+    @GetMapping(value = "/blog")
     public ResponseEntity<Iterable<Blog>> getAllBlogs() {
         return blogService.getAllBlogs();
     }

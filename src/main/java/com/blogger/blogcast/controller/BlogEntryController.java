@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class BlogEntryController {
 
-    BlogEntryService blogEntryServices;
+    private BlogEntryService blogEntryServices;
 
     @Autowired
     public BlogEntryController(BlogEntryService blogEntryServices) {
