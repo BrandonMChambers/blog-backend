@@ -17,29 +17,29 @@ public class BlogEntryController {
         this.blogEntryServices = blogEntryServices;
     }
 
-    @PostMapping("/blogEntry")
-    public ResponseEntity<BlogEntry> create (@RequestBody BlogEntry blogEntry){
-        blogEntry = blogEntryServices.save(blogEntry);
-        return new ResponseEntity<>( blogEntryServices.create(blogEntry), HttpStatus.CREATED);
+    @PostMapping(value = "/blogEntry")
+    public ResponseEntity<BlogEntry> create(@RequestBody BlogEntry blogEntry){
+        return blogEntryServices.createBlogEntry(blogEntry);
     }
 
-    @GetMapping("/blogEntry") public ResponseEntity<Iterable<BlogEntry>> index() {
-        return new ResponseEntity<>(blogEntryServices.index(), HttpStatus.OK);
+    @GetMapping(value = "/blogEntry")
+    public ResponseEntity<Iterable<BlogEntry>> index() {
+        return blogEntryServices.index();
     }
 
-    @GetMapping("/blogEntry/{id}")
+    @GetMapping(value = "/blogEntry/{id}")
     public ResponseEntity<BlogEntry> show(@PathVariable Long id) {
-        return new ResponseEntity<>(blogEntryServices.show(id), HttpStatus.OK);
+        return blogEntryServices.show(id);
     }
 
-    @PutMapping("/blogEntry/{id}")
+    @PutMapping(value = "/blogEntry/{id}")
     public ResponseEntity<BlogEntry> update(@PathVariable Long id, @RequestBody BlogEntry blogEntry) {
-        return new ResponseEntity<>(blogEntryServices.update(id, blogEntry), HttpStatus.OK);
+        return blogEntryServices.update(id, blogEntry);
     }
 
-    @DeleteMapping("/blogEntry/{id}")
+    @DeleteMapping(value = "/blogEntry/{id}")
     public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
-        return new ResponseEntity<>(blogEntryServices.delete(id), HttpStatus.OK);
+        return blogEntryServices.deleteBlogEntry(id);
     }
 
 }

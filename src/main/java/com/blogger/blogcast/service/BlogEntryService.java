@@ -1,9 +1,13 @@
 package com.blogger.blogcast.service;
 
+import com.blogger.blogcast.model.Blog;
 import com.blogger.blogcast.model.BlogEntry;
 import com.blogger.blogcast.repository.BlogEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 @Service
 public class BlogEntryService {
@@ -14,31 +18,32 @@ public class BlogEntryService {
         this.blogEntryRepository = blogEntryRepository;
     }
 
-    public Iterable<BlogEntry> index() {
-        return  blogEntryRepository.findAll();
+    public ResponseEntity<BlogEntry> createBlogEntry(@RequestBody BlogEntry blogEntry){
+        blogEntry = blogEntryRepository.save(blogEntry);
+        return new ResponseEntity<>(blogEntry, HttpStatus.CREATED);
     }
 
-    public BlogEntry show(Long id) {
-        return blogEntryRepository.findById(id).get();
+    public ResponseEntity<Iterable<BlogEntry>> index() {
+        Iterable<BlogEntry> allBlogEntries = blogEntryRepository.findAll();
+        return new ResponseEntity<>(allBlogEntries, HttpStatus.OK);
     }
 
-    public BlogEntry create (BlogEntry blogEntry) {
-        return blogEntryRepository.save(blogEntry);
+    public ResponseEntity<BlogEntry> show( Long id) {
+        return new ResponseEntity<>(blogEntryRepository.findById(id).get(), HttpStatus.OK);
     }
 
-    public BlogEntry save (BlogEntry blogEntry) {
-        return blogEntryRepository.save(blogEntry);
+    public ResponseEntity<BlogEntry> update(Long id, BlogEntry blogEntry) {
+        BlogEntry original = blogEntryRepository.findById(id).get();
+        original.setTitle(blogEntry.getTitle());
+        original.setBody(blogEntry.getBody());
+        blogEntryRepository.save(original);
+        return new ResponseEntity<>(original, HttpStatus.OK);
     }
 
-    public BlogEntry update(Long id, BlogEntry updateBlogEntry) {
-        BlogEntry originalBlog = blogEntryRepository.findById(id).get();
-        originalBlog.setTitle(updateBlogEntry.getTitle());
-        originalBlog.setBody(updateBlogEntry.getBody());
-        return blogEntryRepository.save(originalBlog);
-    }
-
-    public Boolean delete(Long id) {
+    public ResponseEntity<Boolean> deleteBlogEntry(Long id) {
         blogEntryRepository.deleteById(id);
-        return true;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 }

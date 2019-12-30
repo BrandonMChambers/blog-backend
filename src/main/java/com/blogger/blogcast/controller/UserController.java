@@ -24,76 +24,61 @@ public class UserController {
 
     @PostMapping(value = "/user")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        user = userService.create(user);
-        URI newBlogURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
-        HttpHeaders newHeader = new HttpHeaders();
-        newHeader.setLocation(newBlogURI);
-        return new ResponseEntity<>(newHeader, HttpStatus.CREATED);
+       return userService.createUser(user);
     }
 
     @GetMapping(value = "/user")
     public ResponseEntity<Iterable<User>> getAllUsers() {
-        Iterable<User> allUsers = userService.findAll();
-        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+        return userService.getAllUsers();
     }
 
     @GetMapping(value = "/user/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        User user = userService.findById(userId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return userService.getUserById(userId);
     }
 
     @PutMapping(value = "/user/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) {
-        User updated = userService.update(userId, user);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+        return userService.updateUser(userId, user);
     }
 
     @DeleteMapping(value = "/user/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
-        userService.delete(userId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return userService.deleteUser(userId);
     }
 
     @PutMapping(value = "/user/{userId}/changeusername")
     public ResponseEntity<User> changeUsername(@PathVariable Long userId, @RequestBody User user) {
-        User updated = userService.changeUsername(userId, user);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+        return userService.changeUsername(userId, user);
     }
 
     @GetMapping(value = "/user/{userId}/running")
     public ResponseEntity<Iterable<Blog>> getAllRunning(@PathVariable Long userId) {
-        Iterable<Blog> running = userService.getRunning(userId);
-        return new ResponseEntity<>(running, HttpStatus.OK);
+        return userService.getAllRunning(userId);
     }
 
     @PutMapping(value ="/user/{userId}/running-add/{blogId}")
     public ResponseEntity<User> addBlogToRunning(@PathVariable Long userId, @PathVariable Long blogId) {
-        User user = userService.addToRunning(userId, blogId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return userService.addBlogToRunning(userId, blogId);
     }
 
     @PutMapping(value ="/user/{userId}/running-drop/{blogId}")
     public ResponseEntity<User> removeBlogFromRunning(@PathVariable Long userId, @PathVariable Long blogId) {
-        User user = userService.removeFromRunning(userId, blogId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return userService.removeFromRunning(userId,blogId);
     }
 
     @GetMapping(value = "/user/{userId}/following")
     public ResponseEntity<Iterable<Blog>> getAllFollowing(@PathVariable Long userId) {
-        Iterable<Blog> following = userService.getFollowing(userId);
-        return new ResponseEntity<>(following, HttpStatus.OK);
+        return userService.getAllFollowing(userId);
     }
 
     @PutMapping(value ="/user/{userId}/following-add/{blogId}")
     public ResponseEntity<User> addBlogToFollowing(@PathVariable Long userId, @PathVariable Long blogId) {
-        User user = userService.addToFollowing(userId, blogId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return userService.addBlogToFollowing(userId, blogId);
     }
 
     @PutMapping(value ="/user/{userId}/following-drop/{blogId}")
     public ResponseEntity<User> removeBlogFromFollowing(@PathVariable Long userId, @PathVariable Long blogId) {
-        User user = userService.removeFromFollowing(userId, blogId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return userService.removeBlogFromFollowing(userId, blogId);
     }
 }
