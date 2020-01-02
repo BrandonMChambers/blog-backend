@@ -37,6 +37,7 @@ public class BlogController {
         return blogService.getBlogById(blogId);
     }
 
+
     @PutMapping(value = "/blog/{blogId}")
     public ResponseEntity<Blog> updateBlog(@PathVariable Long blogId, @RequestBody Blog blog) {
         return blogService.updateBlog(blogId, blog);
