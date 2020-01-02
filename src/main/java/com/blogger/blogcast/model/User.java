@@ -25,16 +25,7 @@ public class User {
     private List<Blog> following;
 
 
-    public User() {
-    }
-
-    public User(Long id, String username){
-        this.username = username;
-    }
-
-    public User(String username) {
-        this.username = username;
-    }
+    private User() { }
 
     public Long getId() {
         return id;
