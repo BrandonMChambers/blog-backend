@@ -10,46 +10,72 @@ import java.util.Set;
 public class Blog {
 
     @Id
+    @Column(name = "BLOG_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String blogTitle;
+    private String title;
+
+    @Column
+    private String description;
 
     @Column
     private Instant createdOn;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<BlogEntry> blogEntries = new HashSet<BlogEntry>();
+    @JoinColumn(name = "USER_ID")
+    private Long ownerId;
 
-    public Blog() {}
-    public Blog(String blogTitle, Instant createdOn){
-        this.blogTitle = blogTitle;
+    @JoinColumn(name = "USER_NAME")
+    private String ownerName;
+
+    public Blog() { }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Instant getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
 
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
-
-    public String getBlogTitle() { return blogTitle; }
-
-    public void setBlogTitle(String blogTitle) { this.blogTitle = blogTitle; }
-
-    public Instant getCreatedOn() { return createdOn; }
-
-    public void setCreatedOn(Instant createdOn) { this.createdOn = createdOn; }
-
-    public Set<BlogEntry> getBlogEntries() {
-        return blogEntries;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setBlogEntries(Set<BlogEntry> blogEntries) {
-        this.blogEntries = blogEntries;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
-    @Override
-    public String toString(){
-        return "Blog{" + "id=" + id + ", blogTitle=" + blogTitle + ", createdOn=" + createdOn + ", blogEntries=" + blogEntries + "}";
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 }

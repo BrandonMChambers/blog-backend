@@ -6,43 +6,35 @@ import java.time.Instant;
 import java.util.Date;
 
 @Entity
-@Table(name = "BLOGENTRY")
+@Table(name = "ENTRY")
 public class BlogEntry {
 
     @Id
-    @Column(name = "BLOGENTRY_ID")
+    @Column(name = "ENTRY_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "USER_ID")
-    private Long user_Id;
-
-    @JoinColumn(name = "BLOG_ID")
-    private Long blog_Id;
-
     @NotEmpty
-    @Column(name = "TITLE")
+    @Column//(name = "ENTRY_TITLE")
     private String title;
 
     @NotEmpty
-    @Column(name = "BLOGBODY")
+    @Column//(name = "ENTRY_BODY")
     private String body;
 
-    @Column(name = "CREATED_ON")
+    @Column//(name = "CREATED_ON")
     private Instant createdOn;
 
-    public BlogEntry(Long blogEntryId, Long userId, Long blogId, String title, String body, Instant createdOn) {
-        this.id = blogEntryId;
-        this.user_Id = userId;
-        this.blog_Id = blogId;
-        this.title = title;
-        this.body = body;
-        this.createdOn = createdOn;
-    }
+    @JoinColumn(name = "USER_ID")
+    private Long authorId;
 
-    public BlogEntry(String title, String body, Instant createdOn){
-        this(null, null, null, title, body, createdOn);
-    }
+    @JoinColumn(name = "USER_NAME")
+    private String authorName;
+
+    @JoinColumn(name = "BLOG_ID")
+    private Long blogId;
+
+    public BlogEntry() { }
 
     public Long getId() {
         return id;
@@ -50,22 +42,6 @@ public class BlogEntry {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUser_Id() {
-        return user_Id;
-    }
-
-    public void setUser_Id(Long user_Id) {
-        this.user_Id = user_Id;
-    }
-
-    public Long getBlog_Id() {
-        return blog_Id;
-    }
-
-    public void setBlog_Id(Long blog_Id) {
-        this.blog_Id = blog_Id;
     }
 
     public String getTitle() {
@@ -92,9 +68,27 @@ public class BlogEntry {
         this.createdOn = createdOn;
     }
 
-    @Override
-    public String toString(){
-        return "BlogEntry{" + "id=" + id + ", user_id=" + user_Id + ", blog_id=" + blog_Id + ", title=" + title + ", body=" + body + ", createdOn" + createdOn + "}";
+    public Long getAuthorId() {
+        return authorId;
     }
 
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public Long getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(Long blogId) {
+        this.blogId = blogId;
+    }
 }
