@@ -53,6 +53,9 @@ public class CommentController {
      *  {"body": "edited a comment"}
      */
 
+    @GetMapping(value = "/comments/blogentry/{blogentryId}")
+    public ResponseEntity<Iterable<Comment>> getCommentsByBlogEntryIdZ(@PathVariable Long blogentryId) { return commentService.getCommentsByBlogEntryId(blogentryId); }
+
     @PutMapping(value = "/comments/{commentId}")
     public ResponseEntity<Comment> updateComment(@PathVariable Long commentId, @RequestBody Comment comment) {
         return commentService.updateComment(commentId, comment);

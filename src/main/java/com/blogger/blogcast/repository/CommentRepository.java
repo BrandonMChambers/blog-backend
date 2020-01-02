@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
+
     @Query(value = "SELECT comment.* FROM comment, blog_entry WHERE blog_entry.BLOG_ENTRY_ID = ?1 AND comment.BLOG_ENTRY_ID = blog_entry.BLOG_ENTRY_ID", nativeQuery = true)
     Iterable<Comment> findCommentsByBlogEntry(Long blogEntryId);
 
-//    Iterable<Comment> findCommentsByBlog_entry_id(Long blog_entry_id);
+    Iterable<Comment> getCommentsByBlogEntryId(Long blogEntryId);
+
 }
