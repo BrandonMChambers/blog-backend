@@ -1,11 +1,7 @@
 package com.blogger.blogcast.model;
-
-import com.blogger.blogcast.repository.BlogRepository;
-
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,45 +22,38 @@ public class Blog {
     @Column
     private Instant createdOn;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<BlogEntry> blogEntries;
+    @JoinColumn(name = "USER_ID")
+    private Long ownerId;
+
+    @JoinColumn(name = "USER_NAME")
+    private String ownerName;
+
 
     public Blog() { }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
 
-    public String getTitle() {
-        return title;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getTitle() { return title; }
 
-    public String getDescription() {
-        return description;
-    }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getDescription() { return description; }
 
-    public Instant getCreatedOn() {
-        return createdOn;
-    }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
-    }
+    public Instant getCreatedOn() { return createdOn; }
 
-    public List<BlogEntry> getBlogEntries() { return blogEntries; }
+    public void setCreatedOn(Instant createdOn) { this.createdOn = createdOn; }
 
-    public void setBlogEntries(List<BlogEntry> blogEntries) { this.blogEntries = blogEntries; }
+    public Long getOwnerId() { return ownerId; }
+
+    public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
+
+    public String getOwnerName() { return ownerName; }
+
+    public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
+
 }
