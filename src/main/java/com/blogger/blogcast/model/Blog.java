@@ -22,12 +22,6 @@ public class Blog {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<BlogEntry> blogEntries = new HashSet<BlogEntry>();
 
-    public Blog() {}
-    public Blog(String blogTitle, Instant createdOn){
-        this.blogTitle = blogTitle;
-        this.createdOn = createdOn;
-    }
-
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
