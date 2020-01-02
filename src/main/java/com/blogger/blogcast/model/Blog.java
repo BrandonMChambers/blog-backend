@@ -1,8 +1,11 @@
 package com.blogger.blogcast.model;
 
+import com.blogger.blogcast.repository.BlogRepository;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,11 +26,9 @@ public class Blog {
     @Column
     private Instant createdOn;
 
-    @JoinColumn(name = "USER_ID")
-    private Long ownerId;
-
-    @JoinColumn(name = "USER_NAME")
-    private String ownerName;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<BlogEntry> blogEntries;
 
     public Blog() { }
 
@@ -63,19 +64,7 @@ public class Blog {
         this.createdOn = createdOn;
     }
 
-    public Long getOwnerId() {
-        return ownerId;
-    }
+    public List<BlogEntry> getBlogEntries() { return blogEntries; }
 
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
+    public void setBlogEntries(List<BlogEntry> blogEntries) { this.blogEntries = blogEntries; }
 }
