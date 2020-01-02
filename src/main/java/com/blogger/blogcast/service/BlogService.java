@@ -41,6 +41,7 @@ public class BlogService {
     public ResponseEntity<Blog> updateBlog(Long blogId, Blog blog) {
         Blog original = blogRepository.findById(blogId).get();
         original.setTitle(blog.getTitle());
+        original.setDescription(blog.getDescription());
         blogRepository.save(original);
         return new ResponseEntity<>(original, HttpStatus.OK);
     }

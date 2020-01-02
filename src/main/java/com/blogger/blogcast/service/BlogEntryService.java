@@ -45,5 +45,10 @@ public class BlogEntryService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    public ResponseEntity<Iterable<BlogEntry>> getEntriesForBlog(Long blogId) {
+        Iterable<BlogEntry> entries = blogEntryRepository.getBlogEntriesByBlogId(blogId);
+        return new ResponseEntity<>(entries, HttpStatus.OK);
+    }
+
 
 }

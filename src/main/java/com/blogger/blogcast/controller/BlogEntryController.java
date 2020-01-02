@@ -1,5 +1,6 @@
 package com.blogger.blogcast.controller;
 
+import com.blogger.blogcast.model.Blog;
 import com.blogger.blogcast.model.BlogEntry;
 import com.blogger.blogcast.service.BlogEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class BlogEntryController {
 
@@ -40,6 +42,12 @@ public class BlogEntryController {
     @DeleteMapping(value = "/blogEntry/{id}")
     public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
         return blogEntryServices.deleteBlogEntry(id);
+    }
+
+    //temporary
+    @GetMapping(value = "/blog/{blogId}/entries")
+    public ResponseEntity<Iterable<BlogEntry>> getEntriesForBlog(@PathVariable Long blogId) {
+        return blogEntryServices.getEntriesForBlog(blogId);
     }
 
 }

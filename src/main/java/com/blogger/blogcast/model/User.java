@@ -19,11 +19,11 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<Blog> running;
+    private List<Long> running; //Ids of Blogs
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<Blog> following;
+    private List<Long> following; //Ids of Blogs
 
     public User() { }
 
@@ -43,19 +43,19 @@ public class User {
         this.username = username;
     }
 
-    public List<Blog> getRunning() {
+    public List<Long> getRunning() {
         return running;
     }
 
-    public void setRunning(List<Blog> running) {
+    public void setRunning(List<Long> running) {
         this.running = running;
     }
 
-    public List<Blog> getFollowing() {
+    public List<Long> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<Blog> following) {
+    public void setFollowing(List<Long> following) {
         this.following = following;
     }
 
