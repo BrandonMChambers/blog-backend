@@ -89,7 +89,7 @@ public class UserService {
         Blog toDrop = blogRepository.findById(blogId).get();
         List<Blog> running = user.getRunning();
         running.remove(toDrop);
-        user.setFollowing(running);
+        user.setRunning(running);
         userRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
