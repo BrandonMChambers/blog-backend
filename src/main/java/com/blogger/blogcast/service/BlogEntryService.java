@@ -32,6 +32,12 @@ public class BlogEntryService {
         return new ResponseEntity<>(blogEntryRepository.findById(id).get(), HttpStatus.OK);
     }
 
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByBlogId(Long blogId) {
+        Iterable<BlogEntry> allBlogEntries = blogEntryRepository.getBlogEntriesByBlogId(blogId);
+        return new ResponseEntity<>(allBlogEntries, HttpStatus.OK);
+    }
+
+
     public ResponseEntity<BlogEntry> update(Long id, BlogEntry blogEntry) {
         BlogEntry original = blogEntryRepository.findById(id).get();
         original.setTitle(blogEntry.getTitle());

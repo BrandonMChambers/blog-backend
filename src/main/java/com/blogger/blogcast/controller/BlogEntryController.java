@@ -32,6 +32,9 @@ public class BlogEntryController {
         return blogEntryServices.show(id);
     }
 
+    @GetMapping(value = "/blogEntry/blog/{blogId}")
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByBlogId(@PathVariable Long blogId) { return blogEntryServices.getBlogEntriesByBlogId(blogId);}
+
     @PutMapping(value = "/blogEntry/{id}")
     public ResponseEntity<BlogEntry> update(@PathVariable Long id, @RequestBody BlogEntry blogEntry) {
         return blogEntryServices.update(id, blogEntry);
