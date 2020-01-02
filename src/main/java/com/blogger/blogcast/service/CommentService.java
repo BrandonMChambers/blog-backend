@@ -25,11 +25,11 @@ public class CommentService {
     }
 
     public ResponseEntity<Comment> postCommentOnBlogEntry(Long blogEntryId, Comment comment) {
-        comment.setBlog_entry_id(blogEntryId);
+        comment.setBlogEntryId(blogEntryId);
         // TODO: generate timestamp at time of creation
         comment = commentRepository.save(comment);
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{blogEntryId}").buildAndExpand(comment.getBlog_entry_id()).toUri());
+        responseHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{blogEntryId}").buildAndExpand(comment.getBlogEntryId()).toUri());
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 

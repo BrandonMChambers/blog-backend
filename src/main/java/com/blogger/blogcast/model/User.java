@@ -9,10 +9,11 @@ import java.util.List;
 public class User {
 
     @Id
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "USER_NAME")
     @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
     private String username;
 
@@ -26,6 +27,7 @@ public class User {
 
 
     private User() { }
+
 
     public Long getId() {
         return id;
