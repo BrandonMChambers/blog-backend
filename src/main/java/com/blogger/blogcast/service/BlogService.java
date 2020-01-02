@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -41,7 +40,7 @@ public class BlogService {
 
     public ResponseEntity<Blog> updateBlog(Long blogId, Blog blog) {
         Blog original = blogRepository.findById(blogId).get();
-        original.setBlogTitle(blog.getBlogTitle());
+        original.setTitle(blog.getTitle());
         blogRepository.save(original);
         return new ResponseEntity<>(original, HttpStatus.OK);
     }
