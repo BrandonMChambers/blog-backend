@@ -50,6 +50,7 @@ public class UserService {
         original.setUsername(user.getUsername());
         original.setRunning(user.getRunning());
         original.setFollowing(user.getFollowing());
+        userRepository.save(original);
         return new ResponseEntity<>(original, HttpStatus.OK);
     }
 

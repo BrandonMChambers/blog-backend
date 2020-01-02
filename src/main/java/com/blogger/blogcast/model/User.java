@@ -24,18 +24,6 @@ public class User {
     @JoinColumn
     private List<Blog> following;
 
-
-    public User() {
-    }
-
-    public User(Long id, String username){
-        this.username = username;
-    }
-
-    public User(String username) {
-        this.username = username;
-    }
-
     public Long getId() {
         return id;
     }
