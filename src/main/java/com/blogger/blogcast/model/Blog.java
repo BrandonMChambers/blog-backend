@@ -1,5 +1,4 @@
 package com.blogger.blogcast.model;
-
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.HashSet;
@@ -29,53 +28,32 @@ public class Blog {
     @JoinColumn(name = "USER_NAME")
     private String ownerName;
 
+
     public Blog() { }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
 
-    public String getTitle() {
-        return title;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getTitle() { return title; }
 
-    public String getDescription() {
-        return description;
-    }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getDescription() { return description; }
 
-    public Instant getCreatedOn() {
-        return createdOn;
-    }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
-    }
+    public Instant getCreatedOn() { return createdOn; }
 
-    public Long getOwnerId() {
-        return ownerId;
-    }
+    public void setCreatedOn(Instant createdOn) { this.createdOn = createdOn; }
 
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
+    public Long getOwnerId() { return ownerId; }
 
-    public String getOwnerName() {
-        return ownerName;
-    }
+    public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
+    public String getOwnerName() { return ownerName; }
+
+    public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
+
 }

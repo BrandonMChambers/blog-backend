@@ -22,7 +22,9 @@ public class User {
 
     private ArrayList<Long> following = new ArrayList<>(); //Ids of Blogs
 
-    public User() { }
+
+    private User() { }
+
 
     public Long getId() {
         return id;

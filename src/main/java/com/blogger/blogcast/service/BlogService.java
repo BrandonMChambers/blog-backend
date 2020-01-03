@@ -42,6 +42,8 @@ public class BlogService {
         Blog original = blogRepository.findById(blogId).get();
         original.setTitle(blog.getTitle());
         original.setDescription(blog.getDescription());
+        original.setOwnerId(blog.getOwnerId());
+        original.setOwnerName(blog.getOwnerName());
         blogRepository.save(original);
         return new ResponseEntity<>(original, HttpStatus.OK);
     }

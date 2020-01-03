@@ -80,14 +80,16 @@ public class UserService {
         ArrayList<Long> running = user.getRunning();
         running.add(blogId);
         user.setRunning(running);
+        userRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     public ResponseEntity<User> removeFromRunning(Long userId, Long blogId) {
         User user = userRepository.findById(userId).get();
-        ArrayList<Long> running = user.getFollowing();
+        ArrayList<Long> running = user.getRunning();
         running.remove(blogId);
-        user.setFollowing(running);
+        user.setRunning(running);
+        userRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -102,6 +104,7 @@ public class UserService {
         ArrayList<Long> following = user.getFollowing();
         following.add(blogId);
         user.setFollowing(following);
+        userRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -110,6 +113,7 @@ public class UserService {
         ArrayList<Long> following = user.getFollowing();
         following.remove(blogId);
         user.setFollowing(following);
+        userRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
