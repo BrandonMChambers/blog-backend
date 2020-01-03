@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -76,7 +77,7 @@ public class UserService {
 
     public ResponseEntity<User> addBlogToRunning(Long userId, Long blogId) {
         User user = userRepository.findById(userId).get();
-        List<Long> running = user.getRunning();
+        ArrayList<Long> running = user.getRunning();
         running.add(blogId);
         user.setRunning(running);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -84,7 +85,7 @@ public class UserService {
 
     public ResponseEntity<User> removeFromRunning(Long userId, Long blogId) {
         User user = userRepository.findById(userId).get();
-        List<Long> running = user.getFollowing();
+        ArrayList<Long> running = user.getFollowing();
         running.remove(blogId);
         user.setFollowing(running);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -98,7 +99,7 @@ public class UserService {
 
     public ResponseEntity<User> addBlogToFollowing(Long userId, Long blogId) {
         User user = userRepository.findById(userId).get();
-        List<Long> following = user.getFollowing();
+        ArrayList<Long> following = user.getFollowing();
         following.add(blogId);
         user.setFollowing(following);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -106,7 +107,7 @@ public class UserService {
 
     public ResponseEntity<User> removeBlogFromFollowing(Long userId, Long blogId) {
         User user = userRepository.findById(userId).get();
-        List<Long> following = user.getFollowing();
+        ArrayList<Long> following = user.getFollowing();
         following.remove(blogId);
         user.setFollowing(following);
         return new ResponseEntity<>(user, HttpStatus.OK);
