@@ -2,20 +2,29 @@ package com.blogger.blogcast.service;
 
 import com.blogger.blogcast.model.Blog;
 import com.blogger.blogcast.model.BlogEntry;
+import com.blogger.blogcast.model.User;
 import com.blogger.blogcast.repository.BlogEntryRepository;
+import com.blogger.blogcast.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class BlogEntryService {
     private BlogEntryRepository blogEntryRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public BlogEntryService(BlogEntryRepository blogEntryRepository) {
+    public BlogEntryService(BlogEntryRepository blogEntryRepository, UserRepository userRepository) {
         this.blogEntryRepository = blogEntryRepository;
+        this.userRepository = userRepository;
     }
 
     public ResponseEntity<BlogEntry> createBlogEntry(@RequestBody BlogEntry blogEntry){
@@ -51,10 +60,17 @@ public class BlogEntryService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Iterable<BlogEntry>> getEntriesForBlog(Long blogId) {
-        Iterable<BlogEntry> entries = blogEntryRepository.getBlogEntriesByBlogId(blogId);
-        return new ResponseEntity<>(entries, HttpStatus.OK);
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByAuthorId(Long authorId) {
+        List<BlogEntry> postHistory = blogEntryRepository.getBlogEntriesByAuthorId(authorId);
+        Collections.sort(postHistory);
+        return new ResponseEntity<>(postHistory, HttpStatus.OK);
     }
 
-
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByUserFollowing(Long userId) {
+        List<BlogEntry> timeline = new ArrayList();
+        Iterable<Long> followingIds = userRepository.findById(userId).get().getRunning();
+        for(Long blogId : followingIds) { timeline.addAll(blogEntryRepository.getBlogEntriesByBlogId(blogId)); }
+        Collections.sort(timeline);
+        return new ResponseEntity<>(timeline, HttpStatus.OK);
+    }
 }

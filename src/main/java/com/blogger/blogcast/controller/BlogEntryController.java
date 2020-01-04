@@ -38,19 +38,18 @@ public class BlogEntryController {
     public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByBlogId(@PathVariable Long blogId) { return blogEntryServices.getBlogEntriesByBlogId(blogId);}
 
     @PutMapping(value = "/blogEntry/{id}")
-    public ResponseEntity<BlogEntry> update(@PathVariable Long id, @RequestBody BlogEntry blogEntry) {
-        return blogEntryServices.update(id, blogEntry);
-    }
+    public ResponseEntity<BlogEntry> update(@PathVariable Long id, @RequestBody BlogEntry blogEntry) { return blogEntryServices.update(id, blogEntry); }
 
     @DeleteMapping(value = "/blogEntry/{id}")
     public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
         return blogEntryServices.deleteBlogEntry(id);
     }
 
-    //temporary
-    @GetMapping(value = "/blog/{blogId}/entries")
-    public ResponseEntity<Iterable<BlogEntry>> getEntriesForBlog(@PathVariable Long blogId) {
-        return blogEntryServices.getEntriesForBlog(blogId);
-    }
+    @GetMapping(value = "/user/{userId}/posthistory")
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByAuthorId(@PathVariable Long authorId) { return blogEntryServices.getBlogEntriesByAuthorId(authorId); }
+
+    @GetMapping(value = "/user/{userId}/timeline")
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByUserFollowing(@PathVariable Long userId) { return blogEntryServices.getBlogEntriesByUserFollowing(userId); }
+
 
 }
