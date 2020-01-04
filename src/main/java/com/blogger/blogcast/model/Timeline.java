@@ -6,19 +6,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "TIMELINE")
+@Table//(name = "TIMELINE")
 public class Timeline {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TITLE")
+    @Column//(name = "TITLE")
     private String title;
 
 
-    @Column(name = "TIMESTAMP")
+    @Column//(name = "TIMESTAMP")
     private Date timeStamp;
 
     @OneToMany(cascade = CascadeType.ALL)

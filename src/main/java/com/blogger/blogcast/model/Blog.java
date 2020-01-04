@@ -9,7 +9,7 @@ import java.util.Set;
 public class Blog {
 
     @Id
-    @Column(name = "BLOG_ID")
+    //@Column//(name = "BLOG_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,10 +22,10 @@ public class Blog {
     @Column
     private Instant createdOn;
 
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn//(name = "USER_ID")
     private Long ownerId;
 
-    @JoinColumn(name = "USER_NAME")
+    @JoinColumn//(name = "USER_NAME")
     private String ownerName;
 
 

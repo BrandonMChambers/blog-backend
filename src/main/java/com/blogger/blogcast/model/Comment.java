@@ -30,8 +30,8 @@ import java.time.Instant;
 @Table//(name = "comment")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column//(name = "COMMENT_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @Column//(name = "COMMENT_ID")
     private Long id;
 
     @Column//(name = "COMMENT_BODY")
@@ -40,13 +40,13 @@ public class Comment {
     @Column
     private Instant createdOn;
 
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn//(name = "USER_ID")
     private Long authorId;
 
-    @JoinColumn(name = "USER_NAME")
+    @JoinColumn//(name = "USER_NAME")
     private String authorName;
 
-    @JoinColumn(name = "ENTRY_ID")
+    @JoinColumn//(name = "ENTRY_ID")
     private Long blogEntryId;
 
     public Comment() { }

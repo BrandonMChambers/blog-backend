@@ -6,12 +6,12 @@ import java.time.Instant;
 import java.util.Date;
 
 @Entity
-@Table(name = "ENTRY")
+@Table//(name = "ENTRY")
 public class BlogEntry {
 
     @Id
-    @Column(name = "ENTRY_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @Column//(name = "ENTRY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
@@ -25,13 +25,13 @@ public class BlogEntry {
     @Column//(name = "CREATED_ON")
     private Instant createdOn;
 
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn//(name = "USER_ID")
     private Long authorId;
 
-    @JoinColumn(name = "USER_NAME")
+    @JoinColumn//(name = "USER_NAME")
     private String authorName;
 
-    @JoinColumn(name = "BLOG_ID")
+    @JoinColumn//(name = "BLOG_ID")
     private Long blogId;
 
     public BlogEntry() { }
