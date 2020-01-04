@@ -17,6 +17,14 @@ public class User {
     @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
     private String username;
 
+    @Column(name = "PASSWORD")
+    @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
+    private String password;
+
+    @Column(name = "EMAIL")
+    @Size(min=10, max=100, message = "Username size should be in the range [2...30]")
+    private String email;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     private List<Blog> running;
@@ -26,8 +34,23 @@ public class User {
     private List<Blog> following;
 
 
-    private User() { }
+    public User() { }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
