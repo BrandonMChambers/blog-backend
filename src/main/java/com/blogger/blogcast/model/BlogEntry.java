@@ -3,11 +3,12 @@ package com.blogger.blogcast.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.Date;
 
 @Entity
 @Table(name = "ENTRY")
-public class BlogEntry {
+public class BlogEntry implements Comparable<BlogEntry> {
 
     @Id
     @Column(name = "ENTRY_ID")
@@ -34,7 +35,8 @@ public class BlogEntry {
     @JoinColumn(name = "BLOG_ID")
     private Long blogId;
 
-    public BlogEntry() { }
+    public BlogEntry() {
+    }
 
     public Long getId() {
         return id;
@@ -90,5 +92,10 @@ public class BlogEntry {
 
     public void setBlogId(Long blogId) {
         this.blogId = blogId;
+    }
+
+    @Override
+    public int compareTo(BlogEntry other) {
+        return other.createdOn.compareTo(this.createdOn);
     }
 }

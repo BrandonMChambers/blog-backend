@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  *
  *
  */
-
+@CrossOrigin(origins = "*")
 @RestController
 public class CommentController {
     @Autowired
@@ -61,5 +61,10 @@ public class CommentController {
     @DeleteMapping(value = "/comments/{commentId}")
     public ResponseEntity<Boolean> deleteComment(@PathVariable Long commentId) {
         return commentService.deleteComment(commentId);
+    }
+
+    @GetMapping(value = "/comments/entry/{entryId}")
+    public ResponseEntity<Iterable<Comment>> getCommentsByEntryId(@PathVariable Long entryId) {
+        return commentService.getAllCommentsForBlogEntry(entryId);
     }
 }
