@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
 
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/{userId}/running")
-    public ResponseEntity<Iterable<Blog>> getAllRunning(@PathVariable Long userId) {
+    public ResponseEntity<Iterable<Long>> getAllRunning(@PathVariable Long userId) {
         return userService.getAllRunning(userId);
     }
 
@@ -68,7 +69,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/{userId}/following")
-    public ResponseEntity<Iterable<Blog>> getAllFollowing(@PathVariable Long userId) {
+    public ResponseEntity<Iterable<Long>> getAllFollowing(@PathVariable Long userId) {
         return userService.getAllFollowing(userId);
     }
 

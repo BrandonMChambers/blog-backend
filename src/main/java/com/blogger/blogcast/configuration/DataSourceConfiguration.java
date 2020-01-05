@@ -2,6 +2,7 @@ package com.blogger.blogcast.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -12,19 +13,15 @@ import javax.sql.DataSource;
 @Profile("cloud")
 public class DataSourceConfiguration {
 
-    private static final String USER = System.getenv("DB_UN");
-    private static final String PASS = System.getenv("DB_PW");
-    private static final String URL = System.getenv("DB_URL");
+    @Value("postgres://ddcslyyvigrmjp:b840d1c45e2d9582e18373a0c77a95881251e9b2c33cd7776448cfd1030ad2b5@ec2-174-129-242-183.compute-1.amazonaws.com:5432/d3k8frnjnf3nb9")
+    private String dbUrl;
 
     @Bean
     public DataSource dataSource() {
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setUsername(USER);
-        hikariConfig.setPassword(PASS);
-        hikariConfig.setJdbcUrl(URL);
-        hikariConfig.setDriverClassName("org.postgres.Driver");
-
-        return new HikariDataSource((hikariConfig));
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(dbUrl);
+        return new HikariDataSource(config);
     }
+
 
 }

@@ -2,6 +2,7 @@ package com.blogger.blogcast.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,14 +25,10 @@ public class User {
     @Column(name = "EMAIL")
     @Size(min=10, max=100, message = "Username size should be in the range [2...30]")
     private String email;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<Blog> running;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<Blog> following;
+  
+    private ArrayList<Long> running = new ArrayList<>(); //Ids of Blogs
+  
+    private ArrayList<Long> following = new ArrayList<>(); //Ids of Blogs
 
 
     public User() { }
@@ -68,19 +65,19 @@ public class User {
         this.username = username;
     }
 
-    public List<Blog> getRunning() {
+    public ArrayList<Long> getRunning() {
         return running;
     }
 
-    public void setRunning(List<Blog> running) {
+    public void setRunning(ArrayList<Long> running) {
         this.running = running;
     }
 
-    public List<Blog> getFollowing() {
+    public ArrayList<Long> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<Blog> following) {
+    public void setFollowing(ArrayList<Long> following) {
         this.following = following;
     }
 
