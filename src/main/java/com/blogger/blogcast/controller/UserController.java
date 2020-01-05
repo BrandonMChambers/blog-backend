@@ -1,16 +1,11 @@
 package com.blogger.blogcast.controller;
 
 import com.blogger.blogcast.model.Blog;
-import com.blogger.blogcast.model.User;
+import com.blogger.blogcast.model.BlogUser;
 import com.blogger.blogcast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 public class UserController {
@@ -23,23 +18,23 @@ public class UserController {
     }
 
     @PostMapping(value = "/user")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-       return userService.createUser(user);
+    public ResponseEntity<BlogUser> createUser(@RequestBody BlogUser blogUser) {
+       return userService.createUser(blogUser);
     }
 
     @GetMapping(value = "/user")
-    public ResponseEntity<Iterable<User>> getAllUsers() {
+    public ResponseEntity<Iterable<BlogUser>> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping(value = "/user/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+    public ResponseEntity<BlogUser> getUserById(@PathVariable Long userId) {
         return userService.getUserById(userId);
     }
 
     @PutMapping(value = "/user/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) {
-        return userService.updateUser(userId, user);
+    public ResponseEntity<BlogUser> updateUser(@PathVariable Long userId, @RequestBody BlogUser blogUser) {
+        return userService.updateUser(userId, blogUser);
     }
 
     @DeleteMapping(value = "/user/{userId}")
@@ -48,8 +43,8 @@ public class UserController {
     }
 
     @PutMapping(value = "/user/{userId}/changeusername")
-    public ResponseEntity<User> changeUsername(@PathVariable Long userId, @RequestBody User user) {
-        return userService.changeUsername(userId, user);
+    public ResponseEntity<BlogUser> changeUsername(@PathVariable Long userId, @RequestBody BlogUser blogUser) {
+        return userService.changeUsername(userId, blogUser);
     }
 
     @GetMapping(value = "/user/{userId}/running")
@@ -58,12 +53,12 @@ public class UserController {
     }
 
     @PutMapping(value ="/user/{userId}/running-add/{blogId}")
-    public ResponseEntity<User> addBlogToRunning(@PathVariable Long userId, @PathVariable Long blogId) {
+    public ResponseEntity<BlogUser> addBlogToRunning(@PathVariable Long userId, @PathVariable Long blogId) {
         return userService.addBlogToRunning(userId, blogId);
     }
 
     @PutMapping(value ="/user/{userId}/running-drop/{blogId}")
-    public ResponseEntity<User> removeBlogFromRunning(@PathVariable Long userId, @PathVariable Long blogId) {
+    public ResponseEntity<BlogUser> removeBlogFromRunning(@PathVariable Long userId, @PathVariable Long blogId) {
         return userService.removeFromRunning(userId,blogId);
     }
 
@@ -73,12 +68,12 @@ public class UserController {
     }
 
     @PutMapping(value ="/user/{userId}/following-add/{blogId}")
-    public ResponseEntity<User> addBlogToFollowing(@PathVariable Long userId, @PathVariable Long blogId) {
+    public ResponseEntity<BlogUser> addBlogToFollowing(@PathVariable Long userId, @PathVariable Long blogId) {
         return userService.addBlogToFollowing(userId, blogId);
     }
 
     @PutMapping(value ="/user/{userId}/following-drop/{blogId}")
-    public ResponseEntity<User> removeBlogFromFollowing(@PathVariable Long userId, @PathVariable Long blogId) {
+    public ResponseEntity<BlogUser> removeBlogFromFollowing(@PathVariable Long userId, @PathVariable Long blogId) {
         return userService.removeBlogFromFollowing(userId, blogId);
     }
 }

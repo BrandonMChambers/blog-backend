@@ -1,7 +1,7 @@
 package com.blogger.blogcast.service;
 
 import com.blogger.blogcast.model.Blog;
-import com.blogger.blogcast.model.User;
+import com.blogger.blogcast.model.BlogUser;
 import com.blogger.blogcast.repository.BlogRepository;
 import com.blogger.blogcast.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -27,29 +26,29 @@ public class UserService {
         this.blogRepository = blogRepository;
     }
 
-    public ResponseEntity<User> createUser(User user) {
-        user = userRepository.save(user);
-        URI newBlogURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+    public ResponseEntity<BlogUser> createUser(BlogUser blogUser) {
+        blogUser = userRepository.save(blogUser);
+        URI newBlogURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(blogUser.getId()).toUri();
         HttpHeaders newHeader = new HttpHeaders();
         newHeader.setLocation(newBlogURI);
         return new ResponseEntity<>(newHeader, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Iterable<User>> getAllUsers() {
-        Iterable<User> allUsers = userRepository.findAll();
+    public ResponseEntity<Iterable<BlogUser>> getAllUsers() {
+        Iterable<BlogUser> allUsers = userRepository.findAll();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> getUserById(Long userId) {
-        User user = userRepository.findById(userId).get();
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<BlogUser> getUserById(Long userId) {
+        BlogUser blogUser = userRepository.findById(userId).get();
+        return new ResponseEntity<>(blogUser, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> updateUser(Long userId, User user) {
-        User original = userRepository.findById(userId).get();
-        original.setUsername(user.getUsername());
-        original.setRunning(user.getRunning());
-        original.setFollowing(user.getFollowing());
+    public ResponseEntity<BlogUser> updateUser(Long userId, BlogUser blogUser) {
+        BlogUser original = userRepository.findById(userId).get();
+        original.setUsername(blogUser.getUsername());
+        original.setRunning(blogUser.getRunning());
+        original.setFollowing(blogUser.getFollowing());
         userRepository.save(original);
         return new ResponseEntity<>(original, HttpStatus.OK);
     }
@@ -60,64 +59,64 @@ public class UserService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<User> changeUsername(Long userId, User user) {
-        User original = userRepository.findById(userId).get();
-        original.setUsername(user.getUsername());
+    public ResponseEntity<BlogUser> changeUsername(Long userId, BlogUser blogUser) {
+        BlogUser original = userRepository.findById(userId).get();
+        original.setUsername(blogUser.getUsername());
         userRepository.save(original);
         return new ResponseEntity<>(original, HttpStatus.OK);
     }
 
     public ResponseEntity<Iterable<Blog>> getAllRunning(Long userId) {
-        User user = userRepository.findById(userId).get();
-        user.getRunning();
-        Iterable<Blog> running = user.getRunning();
+        BlogUser blogUser = userRepository.findById(userId).get();
+        blogUser.getRunning();
+        Iterable<Blog> running = blogUser.getRunning();
         return new ResponseEntity<>(running, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> addBlogToRunning(Long userId, Long blogId) {
-        User user = userRepository.findById(userId).get();
+    public ResponseEntity<BlogUser> addBlogToRunning(Long userId, Long blogId) {
+        BlogUser blogUser = userRepository.findById(userId).get();
         Blog toAdd = blogRepository.findById(blogId).get();
-        List<Blog> running = user.getRunning();
+        List<Blog> running = blogUser.getRunning();
         running.add(toAdd);
-        user.setRunning(running);
-        userRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        blogUser.setRunning(running);
+        userRepository.save(blogUser);
+        return new ResponseEntity<>(blogUser, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> removeFromRunning(Long userId, Long blogId) {
-        User user = userRepository.findById(userId).get();
+    public ResponseEntity<BlogUser> removeFromRunning(Long userId, Long blogId) {
+        BlogUser blogUser = userRepository.findById(userId).get();
         Blog toDrop = blogRepository.findById(blogId).get();
-        List<Blog> running = user.getRunning();
+        List<Blog> running = blogUser.getRunning();
         running.remove(toDrop);
-        user.setRunning(running);
-        userRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        blogUser.setRunning(running);
+        userRepository.save(blogUser);
+        return new ResponseEntity<>(blogUser, HttpStatus.OK);
     }
 
     public ResponseEntity<Iterable<Blog>> getAllFollowing(Long userId) {
-        User user = userRepository.findById(userId).get();
-        Iterable<Blog> following = user.getFollowing();
+        BlogUser blogUser = userRepository.findById(userId).get();
+        Iterable<Blog> following = blogUser.getFollowing();
         return new ResponseEntity<>(following, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> addBlogToFollowing(Long userId, Long blogId) {
-        User user = userRepository.findById(userId).get();
+    public ResponseEntity<BlogUser> addBlogToFollowing(Long userId, Long blogId) {
+        BlogUser blogUser = userRepository.findById(userId).get();
         Blog toAdd = blogRepository.findById(blogId).get();
-        List<Blog> following = user.getFollowing();
+        List<Blog> following = blogUser.getFollowing();
         following.add(toAdd);
-        user.setFollowing(following);
-        userRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        blogUser.setFollowing(following);
+        userRepository.save(blogUser);
+        return new ResponseEntity<>(blogUser, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> removeBlogFromFollowing(Long userId, Long blogId) {
-        User user = userRepository.findById(userId).get();
+    public ResponseEntity<BlogUser> removeBlogFromFollowing(Long userId, Long blogId) {
+        BlogUser blogUser = userRepository.findById(userId).get();
         Blog toDrop = blogRepository.findById(blogId).get();
-        List<Blog> following = user.getFollowing();
+        List<Blog> following = blogUser.getFollowing();
         following.remove(toDrop);
-        user.setFollowing(following);
-        userRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        blogUser.setFollowing(following);
+        userRepository.save(blogUser);
+        return new ResponseEntity<>(blogUser, HttpStatus.OK);
     }
 
 
