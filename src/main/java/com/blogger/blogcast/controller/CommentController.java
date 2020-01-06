@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  *
  *
  */
-
+@CrossOrigin(origins = "*")
 @RestController
 public class CommentController {
     @Autowired
@@ -34,17 +34,14 @@ public class CommentController {
      * 	"authorId": 4,
      * 	"blog_entry_id": 3
      * }
+     *
+     * may refactor later
      */
 
     @PostMapping(value = "/comments")
     public ResponseEntity<Comment> postComment(@RequestBody Comment comment) {
-        return commentService.postCommentOnBlogEntry(comment.getBlog_entry_id(), comment);
+        return commentService.postCommentOnBlogEntry(comment.getBlogEntryId(), comment);
     }
-
-//    @PostMapping(value = "/comments")
-//    public ResponseEntity<Comment> postComment(@RequestBody Long blogEntryId, @RequestBody Comment comment) {
-//        return commentService.postCommentOnBlogEntry(blogEntryId, comment);
-//    }
 
     @GetMapping(value = "/comments/{commentId}")
     public ResponseEntity<Comment> getCommentById(@PathVariable Long commentId) {
@@ -66,34 +63,8 @@ public class CommentController {
         return commentService.deleteComment(commentId);
     }
 
-    /**
-     * I'm leaving these complicated endpoints in temporarily
-     * When we start putting stuff together I'll either
-     * start using them again or delete them completely
-     */
-
-//    @RequestMapping(value = "/blog/{blogId}/entry/{blogEntryId}/comments", method = RequestMethod.GET)
-//    public ResponseEntity<Iterable<Comment>> getAllCommentsForBlogEntryInBlog(@PathVariable Long blogId, @PathVariable Long blogEntryId) {
-//        return commentService.getAllCommentsForBlogEntry(blogEntryId);
-//    }
-
-//    @RequestMapping(value = "/blog/{blogId}/entry/{blogEntryId}/comments", method = RequestMethod.POST)
-//    public ResponseEntity<Comment> postCommentOnBlogEntry(@PathVariable Long blogId, @PathVariable Long blogEntryId, @RequestBody Comment comment) {
-//        return commentService.postCommentOnBlogEntry(blogEntryId, comment);
-//    }
-
-//    @RequestMapping(value = "/blog/{blogId}/entry/{blogEntryId}/comments/{commentId}", method = RequestMethod.GET)
-//    public ResponseEntity<Comment> getCommentById(@PathVariable Long blogId, @PathVariable Long blogEntryId, @PathVariable Long commentId) {
-//        return commentService.getCommentById(commentId);
-//    }
-
-//    @RequestMapping(value = "/blog/{blogId}/entry/{blogEntryId}/comments/{commentId}", method = RequestMethod.PUT)
-//    public ResponseEntity<Comment> updateComment(@PathVariable Long blogId, @PathVariable Long blogEntryId, @PathVariable Long commentId, @RequestBody Comment comment) {
-//        return commentService.updateComment(commentId, comment);
-//    }
-
-//    @RequestMapping(value = "/blog/{blogId}/entry/{blogEntryId}/comments/{commentId}", method = RequestMethod.DELETE)
-//    public ResponseEntity<Boolean> deleteComment(@PathVariable Long blogId, @PathVariable Long blogEntryId, @PathVariable Long commentId) {
-//        return commentService.deleteComment(commentId);
-//    }
+    @GetMapping(value = "/comments/entry/{entryId}")
+    public ResponseEntity<Iterable<Comment>> getCommentsByEntryId(@PathVariable Long entryId) {
+        return commentService.getAllCommentsForBlogEntry(entryId);
+    }
 }

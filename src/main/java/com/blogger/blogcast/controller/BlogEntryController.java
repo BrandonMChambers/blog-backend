@@ -1,5 +1,6 @@
 package com.blogger.blogcast.controller;
 
+import com.blogger.blogcast.model.Blog;
 import com.blogger.blogcast.model.BlogEntry;
 import com.blogger.blogcast.service.BlogEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,39 +8,48 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class BlogEntryController {
 
-    BlogEntryService blogEntryServices;
+    private BlogEntryService blogEntryServices;
 
     @Autowired
     public BlogEntryController(BlogEntryService blogEntryServices) {
         this.blogEntryServices = blogEntryServices;
     }
 
-    @PostMapping("/blogEntry")
-    public ResponseEntity<BlogEntry> create (@RequestBody BlogEntry blogEntry){
-        blogEntry = blogEntryServices.save(blogEntry);
-        return new ResponseEntity<>( blogEntryServices.create(blogEntry), HttpStatus.CREATED);
+    @PostMapping(value = "/blogEntry")
+    public ResponseEntity<BlogEntry> create(@RequestBody BlogEntry blogEntry){
+        return blogEntryServices.createBlogEntry(blogEntry);
     }
 
-    @GetMapping("/blogEntry") public ResponseEntity<Iterable<BlogEntry>> index() {
-        return new ResponseEntity<>(blogEntryServices.index(), HttpStatus.OK);
+    @GetMapping(value = "/blogEntry")
+    public ResponseEntity<Iterable<BlogEntry>> index() {
+        return blogEntryServices.index();
     }
 
-    @GetMapping("/blogEntry/{id}")
+    @GetMapping(value = "/blogEntry/{id}")
     public ResponseEntity<BlogEntry> show(@PathVariable Long id) {
-        return new ResponseEntity<>(blogEntryServices.show(id), HttpStatus.OK);
+        return blogEntryServices.show(id);
     }
 
-    @PutMapping("/blogEntry/{id}")
-    public ResponseEntity<BlogEntry> update(@PathVariable Long id, @RequestBody BlogEntry blogEntry) {
-        return new ResponseEntity<>(blogEntryServices.update(id, blogEntry), HttpStatus.OK);
-    }
+    @GetMapping(value = "/blogEntry/blog/{blogId}")
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByBlogId(@PathVariable Long blogId) { return blogEntryServices.getBlogEntriesByBlogId(blogId);}
 
-    @DeleteMapping("/blogEntry/{id}")
+    @PutMapping(value = "/blogEntry/{id}")
+    public ResponseEntity<BlogEntry> update(@PathVariable Long id, @RequestBody BlogEntry blogEntry) { return blogEntryServices.update(id, blogEntry); }
+
+    @DeleteMapping(value = "/blogEntry/{id}")
     public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
-        return new ResponseEntity<>(blogEntryServices.delete(id), HttpStatus.OK);
+        return blogEntryServices.deleteBlogEntry(id);
     }
+
+    @GetMapping(value = "/user/{userId}/posthistory")
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByAuthorId(@PathVariable Long authorId) { return blogEntryServices.getBlogEntriesByAuthorId(authorId); }
+
+    @GetMapping(value = "/user/{userId}/timeline")
+    public ResponseEntity<Iterable<BlogEntry>> getBlogEntriesByUserFollowing(@PathVariable Long userId) { return blogEntryServices.getBlogEntriesByUserFollowing(userId); }
+
 
 }
