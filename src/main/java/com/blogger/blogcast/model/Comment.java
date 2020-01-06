@@ -1,11 +1,10 @@
 package com.blogger.blogcast.model;
 import javax.persistence.*;
+import java.time.Instant;
 
 /**
  * I might have been overly explicit in my table and column annotations.
  * if they need to be changed or removed, that's fine
- *
- *
  */
 
 /**
@@ -28,7 +27,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "comment")
+@Table//(name = "comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,19 +37,19 @@ public class Comment {
     @Column(name = "COMMENT_BODY")
     private String body;
 
+    @Column
+    private Instant createdOn;
+
     @JoinColumn(name = "USER_ID")
     private Long authorId;
 
-    @JoinColumn(name = "BLOG_ENTRY_ID")
-    private Long blog_entry_id;
+    @JoinColumn(name = "USER_NAME")
+    private String authorName;
 
-    /**
-     * Leaving these here, at least for this initial commit
-     * Idk if we will bring these back into the project
-     */
-//    private Set<Reaction> reactions;
-//    private Set<Tag> tags;
+    @JoinColumn(name = "ENTRY_ID")
+    private Long blogEntryId;
 
+    public Comment() { }
 
     public Long getId() {
         return id;
@@ -68,6 +67,14 @@ public class Comment {
         this.body = body;
     }
 
+    public Instant getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Instant createdOn) {
+        this.createdOn = createdOn;
+    }
+
     public Long getAuthorId() {
         return authorId;
     }
@@ -76,17 +83,19 @@ public class Comment {
         this.authorId = authorId;
     }
 
-    public Long getBlog_entry_id() {
-        return blog_entry_id;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setBlog_entry_id(Long blog_entry_id) {
-        this.blog_entry_id = blog_entry_id;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
-    @Override
-    public String toString(){
+    public Long getBlogEntryId() {
+        return blogEntryId;
+    }
 
-        return "Comment{" + "id=" + id + ", body=" + body + ", authorId=" + authorId + ", blog_entry_id=" + blog_entry_id + "}";
+    public void setBlogEntryId(Long blogEntryId) {
+        this.blogEntryId = blogEntryId;
     }
 }

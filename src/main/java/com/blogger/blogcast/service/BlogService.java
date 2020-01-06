@@ -1,41 +1,62 @@
 package com.blogger.blogcast.service;
 
 import com.blogger.blogcast.model.Blog;
+import com.blogger.blogcast.model.BlogUser;
 import com.blogger.blogcast.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @Service
 public class BlogService {
-    BlogRepository blogRepository;
+    private BlogRepository blogRepository;
 
     @Autowired
-    public BlogService(BlogRepository blogRepository) {
+    private AuthService authService;
+
+    @Autowired
+    public BlogService(BlogRepository blogRepository){
         this.blogRepository = blogRepository;
     }
 
-    public Iterable<Blog> findAll() {
-        return blogRepository.findAll();
+    public ResponseEntity<Blog> createBlog(Blog blog) {
+        User username = authService.getCurrentUser().orElseThrow(() ->
+                new IllegalArgumentException("No User Logged In"));
+        blog = blogRepository.save(blog);
+        URI newBlogURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(blog.getId()).toUri();
+        HttpHeaders newHeader = new HttpHeaders();
+        newHeader.setLocation(newBlogURI);
+        return new ResponseEntity<>(newHeader, HttpStatus.CREATED);
     }
 
-    public Blog findById(Long id) {
-        return blogRepository.findById(id).get();
+    public ResponseEntity<Iterable<Blog>> getAllBlogs() {
+        Iterable<Blog> allBlogs = blogRepository.findAll();
+        return new ResponseEntity<>(allBlogs, HttpStatus.OK);
     }
 
-    public Blog create(Blog blog) {
-        return blogRepository.save(blog);
+    public ResponseEntity<Blog> getBlogById(Long blogId) {
+        Blog blog = blogRepository.findById(blogId).get();
+        return new ResponseEntity<>(blog, HttpStatus.OK);
     }
 
-    public Blog update(Long id, Blog blog) {
-        Blog original = blogRepository.findById(id).get();
-        original.setBlogTitle(blog.getBlogTitle());
-        return blogRepository.save(original);
+    public ResponseEntity<Blog> updateBlog(Long blogId, Blog blog) {
+        Blog original = blogRepository.findById(blogId).get();
+        original.setTitle(blog.getTitle());
+        original.setDescription(blog.getDescription());
+        original.setOwnerId(blog.getOwnerId());
+        original.setOwnerName(blog.getOwnerName());
+        blogRepository.save(original);
+        return new ResponseEntity<>(original, HttpStatus.OK);
     }
 
-    public Boolean delete(Long id) {
-        Blog blog = blogRepository.findById(id).get();
-        blogRepository.delete(blog);
-        return true;
+    public ResponseEntity<?> deleteBlog(Long blogId) {
+        blogRepository.deleteById(blogId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+
+@CrossOrigin(origins = "*")
 @RestController
+@RequestMapping
 public class BlogController {
 
     private BlogService blogService;
@@ -22,35 +25,28 @@ public class BlogController {
 
     @PostMapping(value = "/blog")
     public ResponseEntity<Blog> createBlog(@RequestBody Blog blog) {
-        blog = blogService.create(blog);
-        URI newBlogURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(blog.getId()).toUri();
-        HttpHeaders newHeader = new HttpHeaders();
-        newHeader.setLocation(newBlogURI);
-        return new ResponseEntity<>(newHeader, HttpStatus.CREATED);
+        return blogService.createBlog(blog);
     }
 
-    @GetMapping(value = "/all-blogs")
+    @GetMapping(value = "/blog")
     public ResponseEntity<Iterable<Blog>> getAllBlogs() {
-        Iterable<Blog> allBlogs = blogService.findAll();
-        return new ResponseEntity<>(allBlogs, HttpStatus.OK);
+        return blogService.getAllBlogs();
     }
 
     @GetMapping(value = "/blog/{blogId}")
     public ResponseEntity<Blog> getBlogById(@PathVariable Long blogId) {
-        Blog blog = blogService.findById(blogId);
-        return new ResponseEntity<>(blog, HttpStatus.OK);
+        return blogService.getBlogById(blogId);
     }
+
 
     @PutMapping(value = "/blog/{blogId}")
     public ResponseEntity<Blog> updateBlog(@PathVariable Long blogId, @RequestBody Blog blog) {
-        Blog updated = blogService.update(blogId, blog);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+        return blogService.updateBlog(blogId, blog);
     }
 
     @DeleteMapping(value = "/blog/{blogId}")
     public ResponseEntity<?> deleteBlog(@PathVariable Long blogId) {
-        blogService.delete(blogId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return blogService.deleteBlog(blogId);
     }
 
 }
