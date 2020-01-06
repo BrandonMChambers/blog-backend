@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
 
@@ -48,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/{userId}/running")
-    public ResponseEntity<Iterable<Blog>> getAllRunning(@PathVariable Long userId) {
+    public ResponseEntity<Iterable<Long>> getAllRunning(@PathVariable Long userId) {
         return userService.getAllRunning(userId);
     }
 
@@ -63,7 +64,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/{userId}/following")
-    public ResponseEntity<Iterable<Blog>> getAllFollowing(@PathVariable Long userId) {
+    public ResponseEntity<Iterable<Long>> getAllFollowing(@PathVariable Long userId) {
         return userService.getAllFollowing(userId);
     }
 

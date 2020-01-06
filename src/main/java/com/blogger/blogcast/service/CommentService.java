@@ -20,7 +20,7 @@ public class CommentService {
     }
 
     public ResponseEntity<Iterable<Comment>> getAllCommentsForBlogEntry(Long blogEntryId) {
-        Iterable<Comment> comments = commentRepository.findCommentsByBlogEntry(blogEntryId);
+        Iterable<Comment> comments = commentRepository.getCommentsByBlogEntryId(blogEntryId);
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
