@@ -13,13 +13,13 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "title")
     private String title;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
+    @Column(name = "created_on")
     private Instant createdOn;
 
     @JoinColumn(name = "USER_ID")
@@ -28,9 +28,7 @@ public class Blog {
     @JoinColumn(name = "USER_NAME")
     private String ownerName;
 
-
     public Blog() { }
-
 
     public Long getId() { return id; }
 

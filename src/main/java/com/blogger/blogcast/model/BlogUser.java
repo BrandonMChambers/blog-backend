@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class User {
+public class BlogUser {
 
     @Id
     @Column(name = "USER_ID")
@@ -15,15 +15,15 @@ public class User {
     private Long id;
 
     @Column(name = "USER_NAME")
-    @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
+//    @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
     private String username;
 
     @Column(name = "PASSWORD")
-    @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
+//    @Size(min=2, max=30, message = "Username size should be in the range [2...30]")
     private String password;
 
     @Column(name = "EMAIL")
-    @Size(min=10, max=100, message = "Username size should be in the range [2...30]")
+//    @Size(min=10, max=30, message = "Username size should be in the range [2...30]")
     private String email;
   
     private ArrayList<Long> running = new ArrayList<>(); //Ids of Blogs
@@ -31,7 +31,7 @@ public class User {
     private ArrayList<Long> following = new ArrayList<>(); //Ids of Blogs
 
 
-    public User() { }
+    public BlogUser() { }
 
     public String getPassword() {
         return password;

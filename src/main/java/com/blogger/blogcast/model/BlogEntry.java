@@ -16,14 +16,14 @@ public class BlogEntry implements Comparable<BlogEntry> {
     private Long id;
 
     @NotEmpty
-    @Column//(name = "ENTRY_TITLE")
+    @Column(name = "ENTRY_TITLE")
     private String title;
 
     @NotEmpty
-    @Column//(name = "ENTRY_BODY")
+    @Column(name = "ENTRY_BODY")
     private String body;
 
-    @Column//(name = "CREATED_ON")
+    @Column(name = "CREATED_ON")
     private Instant createdOn;
 
     @JoinColumn(name = "USER_ID")

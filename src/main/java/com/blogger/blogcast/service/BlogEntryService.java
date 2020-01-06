@@ -2,7 +2,7 @@ package com.blogger.blogcast.service;
 
 import com.blogger.blogcast.model.Blog;
 import com.blogger.blogcast.model.BlogEntry;
-import com.blogger.blogcast.model.User;
+import com.blogger.blogcast.model.BlogUser;
 import com.blogger.blogcast.repository.BlogEntryRepository;
 import com.blogger.blogcast.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

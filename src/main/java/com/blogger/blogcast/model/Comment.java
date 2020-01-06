@@ -31,10 +31,10 @@ import java.time.Instant;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column//(name = "COMMENT_ID")
+    @Column(name = "COMMENT_ID")
     private Long id;
 
-    @Column//(name = "COMMENT_BODY")
+    @Column(name = "COMMENT_BODY")
     private String body;
 
     @Column

@@ -1,5 +1,6 @@
 package com.blogger.blogcast.controller;
 
+import com.blogger.blogcast.security.LoginRequest;
 import com.blogger.blogcast.security.RegisterRequest;
 import com.blogger.blogcast.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class AuthController {
     public ResponseEntity signup(@RequestBody RegisterRequest registerRequest){
             authService.signup(registerRequest);
             return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest loginRequest){
+       return authService.login(loginRequest);
     }
 }
