@@ -1,5 +1,6 @@
 package com.blogger.blogcast.model;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +15,11 @@ public class Blog {
     private Long id;
 
     @Column(name = "title")
+    @Size(min=1, max=255)
     private String title;
 
     @Column(name = "description")
+    @Size(min=1, max=2000)
     private String description;
 
     @Column(name = "created_on")

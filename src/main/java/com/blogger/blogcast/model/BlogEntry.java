@@ -2,6 +2,7 @@ package com.blogger.blogcast.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.Date;
@@ -17,10 +18,12 @@ public class BlogEntry implements Comparable<BlogEntry> {
 
     @NotEmpty
     @Column(name = "ENTRY_TITLE")
+    @Size(min=1, max=255)
     private String title;
 
     @NotEmpty
     @Column(name = "ENTRY_BODY")
+    @Size(min=1, max=2000)
     private String body;
 
     @Column(name = "CREATED_ON")
