@@ -13,7 +13,6 @@ import java.net.URI;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping
 public class BlogController {
 
     private BlogService blogService;
