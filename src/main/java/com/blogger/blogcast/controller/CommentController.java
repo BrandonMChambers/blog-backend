@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  *
  *
  */
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 public class CommentController {
     @Autowired
