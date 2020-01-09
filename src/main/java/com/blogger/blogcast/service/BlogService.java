@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -17,8 +17,8 @@ import java.net.URI;
 public class BlogService {
     private BlogRepository blogRepository;
 
-    @Autowired
-    private AuthService authService;
+//    @Autowired
+//    private AuthService authService;
 
     @Autowired
     public BlogService(BlogRepository blogRepository){
@@ -26,8 +26,8 @@ public class BlogService {
     }
 
     public ResponseEntity<Blog> createBlog(Blog blog) {
-        User username = authService.getCurrentUser().orElseThrow(() ->
-                new IllegalArgumentException("No User Logged In"));
+//        User username = authService.getCurrentUser().orElseThrow(() ->
+//                new IllegalArgumentException("No User Logged In"));
         blog = blogRepository.save(blog);
         URI newBlogURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(blog.getId()).toUri();
         HttpHeaders newHeader = new HttpHeaders();
