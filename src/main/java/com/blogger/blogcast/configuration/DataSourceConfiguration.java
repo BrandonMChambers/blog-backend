@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 @Profile("cloud")
 public class DataSourceConfiguration {
 
-    @Value("postgres://ddcslyyvigrmjp:b840d1c45e2d9582e18373a0c77a95881251e9b2c33cd7776448cfd1030ad2b5@ec2-174-129-242-183.compute-1.amazonaws.com:5432/d3k8frnjnf3nb9")
+    @Value("postgres://amipzhwpjwksvv:44855e91eb7a0ba269c0a74e41aa238670c7d72ac79bffcf3388de0502ce8f74@ec2-174-129-33-167.compute-1.amazonaws.com:5432/d40052gvs96rhq")
     private String dbUrl;
 
     @Bean
