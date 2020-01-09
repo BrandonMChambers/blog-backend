@@ -11,7 +11,7 @@ public class Blog {
 
     @Id
     @Column(name = "BLOG_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "title")
