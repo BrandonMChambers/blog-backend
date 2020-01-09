@@ -25,9 +25,11 @@ public class BlogUser {
     @Column(name = "EMAIL")
     @Size(min=10, max=30, message = "Username size should be in the range [2...30]")
     private String email;
-  
+
+    @ManyToMany
     private ArrayList<Long> running = new ArrayList<>(); //Ids of Blogs
-  
+
+    @ManyToMany
     private ArrayList<Long> following = new ArrayList<>(); //Ids of Blogs
 
 
