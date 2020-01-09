@@ -26,10 +26,12 @@ public class BlogUser {
     @Size(min=10, max=30, message = "Username size should be in the range [2...30]")
     private String email;
 
-    @ManyToMany
+//    @ManyToMany
+//    @Column(name = "RUNNING")
     private ArrayList<Long> running = new ArrayList<>(); //Ids of Blogs
 
-    @ManyToMany
+//    @ManyToMany
+//    @Column(name = "FOLLOWING")
     private ArrayList<Long> following = new ArrayList<>(); //Ids of Blogs
 
 
